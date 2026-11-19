@@ -1,5 +1,31 @@
 # BizBot - Project State
 
+## Status: COMPLETE & FULLY OPERATIONAL 🚀
+**Last Updated:** November 19, 2026
+
+---
+
+## Live URLs
+
+### 🌐 Frontend (Next.js + Tailwind CSS)
+- **Home / Landing Page:** `http://localhost:3000/`
+- **Business Owner Training Portal:** `http://localhost:3000/train` (also aliases `/dashboard`)
+- **Customer Chat Widget (Demo Cafe):** `http://localhost:3000/chat/sunnybrew-cafe`
+
+### ⚙️ Backend API (FastAPI + Uvicorn)
+- **Base URL:** `http://127.0.0.1:8000`
+- **Health Check:** `http://127.0.0.1:8000/health`
+- **Interactive OpenAPI Docs:** `http://127.0.0.1:8000/docs`
+- **Train Endpoint:** `POST http://127.0.0.1:8000/train`
+- **Chat Endpoint:** `POST http://127.0.0.1:8000/chat`
+- **Business Metadata Endpoint:** `GET http://127.0.0.1:8000/business/{business_id}`
+
+### 📦 GitHub Repository
+- **Remote:** `https://github.com/tirthm2538-beep/bizbot`
+- **Branch:** `main`
+
+---
+
 ## Project Goal
 **BizBot** is an embeddable AI customer-support chatbot that small businesses can easily integrate into their websites. It is trained on business-specific context (FAQs, business hours, policies, products, and contact info) provided by the business owner to deliver accurate, real-time customer assistance.
 
@@ -10,7 +36,7 @@
   - Python 3.12
   - FastAPI
   - Uvicorn (ASGI server)
-  - `google-generativeai` (Gemini API SDK with model fallback)
+  - `google-generativeai` (Gemini API SDK with model fallback cascade)
   - `python-dotenv`, `python-multipart`, `pydantic`
 - **Frontend**:
   - Next.js 16 (App Router)
@@ -76,3 +102,8 @@
 - [x] Verified full end-to-end integration:
   - Both production build (`npm run build`) and dev server verified.
   - Live query tests from chat interface confirmed accurate answers returned in UI.
+
+### Step 4: Final Verification & Live Deployment (Completed: November 19, 2026)
+- [x] Confirmed live and working on local development servers.
+- [x] Both Frontend (`http://localhost:3000`) and Backend (`http://127.0.0.1:8000`) running concurrently.
+- [x] Final status, live endpoints, and codebase synced to GitHub repository.
