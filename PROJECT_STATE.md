@@ -5,20 +5,22 @@
 
 ---
 
-## Live URLs
+## Live Production URLs
 
-### 🌐 Frontend (Next.js + Tailwind CSS)
-- **Home / Landing Page:** `http://localhost:3000/`
-- **Business Owner Training Portal:** `http://localhost:3000/train` (also aliases `/dashboard`)
-- **Customer Chat Widget (Demo Cafe):** `http://localhost:3000/chat/sunnybrew-cafe`
+### 🌐 Frontend (Vercel)
+- **Live URL:** `https://bizbot-mocha.vercel.app`
+- **Home / Landing Page:** `https://bizbot-mocha.vercel.app/`
+- **Business Owner Training Portal:** `https://bizbot-mocha.vercel.app/train` (also aliases `/dashboard`)
+- **Customer Chat Widget (Demo Cafe):** `https://bizbot-mocha.vercel.app/chat/sunnybrew-cafe`
+- **Environment Variable (`NEXT_PUBLIC_API_URL`):** Configured to `https://bizbot-1-aah6.onrender.com`
 
-### ⚙️ Backend API (FastAPI + Uvicorn)
-- **Base URL:** `http://127.0.0.1:8000`
-- **Health Check:** `http://127.0.0.1:8000/health`
-- **Interactive OpenAPI Docs:** `http://127.0.0.1:8000/docs`
-- **Train Endpoint:** `POST http://127.0.0.1:8000/train`
-- **Chat Endpoint:** `POST http://127.0.0.1:8000/chat`
-- **Business Metadata Endpoint:** `GET http://127.0.0.1:8000/business/{business_id}`
+### ⚙️ Backend API (Render)
+- **Live Base URL:** `https://bizbot-1-aah6.onrender.com`
+- **Health Check:** `https://bizbot-1-aah6.onrender.com/health`
+- **Interactive OpenAPI Docs:** `https://bizbot-1-aah6.onrender.com/docs`
+- **Train Endpoint:** `POST https://bizbot-1-aah6.onrender.com/train`
+- **Chat Endpoint:** `POST https://bizbot-1-aah6.onrender.com/chat`
+- **Business Metadata Endpoint:** `GET https://bizbot-1-aah6.onrender.com/business/{business_id}`
 
 ### 📦 GitHub Repository
 - **Remote:** `https://github.com/tirthm2538-beep/bizbot`
@@ -38,12 +40,14 @@
   - Uvicorn (ASGI server)
   - `google-generativeai` (Gemini API SDK with model fallback cascade)
   - `python-dotenv`, `python-multipart`, `pydantic`
+  - Hosted on **Render**
 - **Frontend**:
   - Next.js 16 (App Router)
   - React 19
   - TypeScript
   - Tailwind CSS v4
   - `lucide-react` (Modern icons)
+  - Hosted on **Vercel**
 - **Version Control & DevOps**:
   - Git & GitHub CLI (`gh`)
 
@@ -59,9 +63,6 @@
 - [x] Configured `backend/.env` with placeholder `GEMINI_API_KEY=your_key_here`.
 - [x] Set up `.gitignore` rules for `venv/`, `.env`, `__pycache__/`, `node_modules/`, and `.next/`.
 - [x] Created `frontend/` using Next.js + Tailwind CSS + TypeScript (`create-next-app`).
-- [x] Verified local execution:
-  - Backend health check: `http://127.0.0.1:8000/health` -> `{"status": "ok"}`
-  - Frontend dev server: `http://localhost:3000` -> HTTP `200`
 - [x] Created initial git commit and pushed to GitHub repository under `tirthm2538-beep/bizbot`.
 
 ### Step 2: Core Chatbot Engine (Completed: November 19, 2026)
@@ -99,11 +100,9 @@
 - [x] SaaS Home & Landing Page (`/`):
   - Hero section highlighting BizBot's value proposition with CTA buttons to "Train My Business Bot" and "Try Demo: SunnyBrew Cafe".
   - 3-step breakdown explaining raw text ingestion, AI training, and embed code generation.
-- [x] Verified full end-to-end integration:
-  - Both production build (`npm run build`) and dev server verified.
-  - Live query tests from chat interface confirmed accurate answers returned in UI.
 
-### Step 4: Final Verification & Live Deployment (Completed: November 19, 2026)
-- [x] Confirmed live and working on local development servers.
-- [x] Both Frontend (`http://localhost:3000`) and Backend (`http://127.0.0.1:8000`) running concurrently.
-- [x] Final status, live endpoints, and codebase synced to GitHub repository.
+### Step 4: Live Deployment (Completed: November 19, 2026)
+- [x] Backend deployed and live on Render: `https://bizbot-1-aah6.onrender.com`
+- [x] Frontend deployed and live on Vercel: `https://bizbot-mocha.vercel.app`
+- [x] Configured `NEXT_PUBLIC_API_URL` to point to the live Render backend.
+- [x] Production status, live public endpoints, and codebase synced to GitHub repository.
