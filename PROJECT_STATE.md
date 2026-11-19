@@ -13,10 +13,11 @@
   - `google-generativeai` (Gemini API SDK with model fallback)
   - `python-dotenv`, `python-multipart`, `pydantic`
 - **Frontend**:
-  - Next.js (App Router)
+  - Next.js 16 (App Router)
+  - React 19
   - TypeScript
-  - Tailwind CSS
-  - React
+  - Tailwind CSS v4
+  - `lucide-react` (Modern icons)
 - **Version Control & DevOps**:
   - Git & GitHub CLI (`gh`)
 
@@ -56,3 +57,22 @@
     1. Answerable query: operating hours & oat milk availability.
     2. Out-of-bounds query: retail matcha tins and open mic nights (polite fallback to direct contact).
     3. Multi-policy reasoning query: returning unopened retail mugs vs. warm croissants.
+
+### Step 3: Frontend Implementation (Completed: November 19, 2026)
+- [x] Business Owner Portal (`/train` and `/dashboard`):
+  - Form with business name, custom ID slug, and knowledge base textarea.
+  - One-click "Load Sample Cafe Info" button to instantly populate realistic cafe context.
+  - Connects to `POST /train` with loading states and error notifications.
+  - Post-training success card displaying direct shareable customer URL, one-click copy button, direct test button, and ready-to-use HTML `<iframe>` embed snippet.
+- [x] Customer Chat View (`/chat/[business_id]`):
+  - Dedicated chat widget styled with Tailwind CSS.
+  - Dynamic header with business name, active online status badge, and bot icon.
+  - Rounded message bubbles, timestamps, typing indicators (`...`), and auto-scroll to latest message.
+  - Pre-built quick suggestion chips for hours, menu, and return policies.
+  - Graceful 404 state when visiting an unregistered business ID, linking back to the training portal.
+- [x] SaaS Home & Landing Page (`/`):
+  - Hero section highlighting BizBot's value proposition with CTA buttons to "Train My Business Bot" and "Try Demo: SunnyBrew Cafe".
+  - 3-step breakdown explaining raw text ingestion, AI training, and embed code generation.
+- [x] Verified full end-to-end integration:
+  - Both production build (`npm run build`) and dev server verified.
+  - Live query tests from chat interface confirmed accurate answers returned in UI.

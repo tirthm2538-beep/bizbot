@@ -77,6 +77,31 @@ def health_check():
     return {"status": "ok"}
 
 
+@app.get("/business/{business_id}")
+def get_business(business_id: str):
+    biz_id = slugify(business_id)
+    data_file = DATA_DIR / f"{biz_id}.json"
+    if not data_file.exists():
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Business '{biz_id}' not found.",
+        )
+    try:
+        with open(data_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return {
+            "business_id": data.get("business_id", biz_id),
+            "business_name": data.get("business_name", biz_id),
+            "updated_at": data.get("updated_at"),
+            "char_count": len(data.get("info", "")),
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error reading business info: {str(e)}",
+        )
+
+
 @app.post("/train", status_code=status.HTTP_200_OK)
 def train_business(payload: TrainRequest):
     business_name = payload.business_name.strip()
