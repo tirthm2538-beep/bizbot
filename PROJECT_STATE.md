@@ -106,3 +106,11 @@
 - [x] Frontend deployed and live on Vercel: `https://bizbot-mocha.vercel.app`
 - [x] Configured `NEXT_PUBLIC_API_URL` to point to the live Render backend.
 - [x] Production status, live public endpoints, and codebase synced to GitHub repository.
+
+### Step 5: Fix Double Slash API Routing Bug (Completed: November 20, 2026)
+- [x] Diagnosed double-slash bug causing `404 Not Found` when requesting `https://bizbot-1-aah6.onrender.com//train`.
+- [x] Updated frontend codebase (`train/page.tsx` and `chat/[business_id]/page.tsx`) to sanitize `NEXT_PUBLIC_API_URL` with `.replace(/\/+$/, "")` before constructing request URLs.
+- [x] Pushed commit `123a73e` to GitHub `main`, triggering production redeployment on Vercel.
+- [x] Verified live deployment on `https://bizbot-mocha.vercel.app`:
+  - `POST /train` now executes at `https://bizbot-1-aah6.onrender.com/train` with HTTP `200 OK` (success card renders).
+  - Chat queries execute at `https://bizbot-1-aah6.onrender.com/chat` with HTTP `200 OK`.
