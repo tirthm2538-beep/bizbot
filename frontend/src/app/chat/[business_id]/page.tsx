@@ -32,7 +32,7 @@ function ChatContent({ businessId }: { businessId: string }) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const apiBase = process.env.NEXT_PUBLIC_API_URL || "https://bizbot-1-aah6.onrender.com";
+  const apiBase = (process.env.NEXT_PUBLIC_API_URL || "https://bizbot-1-aah6.onrender.com").replace(/\/+$/, "");
 
   // Fetch business metadata
   useEffect(() => {

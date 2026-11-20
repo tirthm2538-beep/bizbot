@@ -76,7 +76,7 @@ export default function TrainPage() {
   const [copiedLink, setCopiedLink] = useState(false);
   const [copiedEmbed, setCopiedEmbed] = useState(false);
 
-  const apiBase = process.env.NEXT_PUBLIC_API_URL || "https://bizbot-1-aah6.onrender.com";
+  const apiBase = (process.env.NEXT_PUBLIC_API_URL || "https://bizbot-1-aah6.onrender.com").replace(/\/+$/, "");
 
   const handleLoadSample = () => {
     setBusinessName(SAMPLE_CAFE_DATA.name);
