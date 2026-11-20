@@ -19,6 +19,38 @@ interface Message {
   timestamp: string;
 }
 
+function cleanMessageText(text: string): string {
+  if (!text) return "";
+  return text
+    .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n")
+    // Fix unexpected line breaks inside times/numbers (e.g. "8:0\n0 AM" -> "8:00 AM")
+    .replace(/(\d+:\d*)\s*\n\s*(\d+)/g, "$1$2")
+    .replace(/(\d+)\s*\n\s*(AM|PM|am|pm)/g, "$1 $2")
+    .replace(/([0-9])\s*\n\s*([0-9])/g, "$1$2")
+    // Clean trailing spaces before newlines
+    .replace(/[ \t]+\n/g, "\n")
+    // Collapse excessive consecutive line breaks
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+function renderMessageContent(text: string) {
+  const cleaned = cleanMessageText(text);
+  // Parse markdown bold **text** so it renders cleanly as strong elements
+  const parts = cleaned.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith("**") && part.endsWith("**") && part.length > 4) {
+      return (
+        <strong key={i} className="font-semibold">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    return part;
+  });
+}
+
 function ChatContent({ businessId }: { businessId: string }) {
   const [businessName, setBusinessName] = useState<string>("Support Assistant");
   const [businessLoading, setBusinessLoading] = useState<boolean>(true);
@@ -137,7 +169,7 @@ function ChatContent({ businessId }: { businessId: string }) {
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
         sender: "bot",
-        text: data.answer || "I could not locate an answer.",
+        text: cleanMessageText(data.answer || "I could not locate an answer."),
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       };
 
@@ -267,13 +299,11 @@ function ChatContent({ businessId }: { businessId: string }) {
                     : "bg-white text-slate-800 border border-slate-200/90 rounded-bl-xs"
                 }`}
               >
-                <div className="whitespace-pre-wrap break-words">
-                  {msg.text.split("\n").map((line, idx) => (
-                    <span key={idx}>
-                      {line}
-                      {idx !== msg.text.split("\n").length - 1 && <br />}
-                    </span>
-                  ))}
+                <div
+                  className="whitespace-pre-wrap break-words [overflow-wrap:break-word] [word-break:normal]"
+                  style={{ wordBreak: "normal", overflowWrap: "break-word", whiteSpace: "pre-wrap" }}
+                >
+                  {renderMessageContent(msg.text)}
                 </div>
                 <div
                   className={`text-[10px] mt-1.5 text-right ${
