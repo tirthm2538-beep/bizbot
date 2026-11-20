@@ -114,3 +114,10 @@
 - [x] Verified live deployment on `https://bizbot-mocha.vercel.app`:
   - `POST /train` now executes at `https://bizbot-1-aah6.onrender.com/train` with HTTP `200 OK` (success card renders).
   - Chat queries execute at `https://bizbot-1-aah6.onrender.com/chat` with HTTP `200 OK`.
+
+### Step 6: Fix Mid-Word Text Wrapping Bug in Chat Bubbles (Completed: November 20, 2026)
+- [x] Resolved mid-character word breaking (e.g. "8:00 AM" splitting into "8:0" / "0 AM"):
+  - Enforced `word-break: normal` and `overflow-wrap: break-word` alongside `white-space: pre-wrap` on the message bubble container in `chat/[business_id]/page.tsx`.
+  - Added text normalization (`cleanMessageText`) to eliminate unexpected line breaks inside numbers, times, and line endings (`\r\n`).
+  - Added markdown bold formatting support (`renderMessageContent`) to cleanly render `**...**` spans without raw asterisks.
+- [x] Committed and pushed changes to GitHub `main` (`57645a8`), deployed live to Vercel.
